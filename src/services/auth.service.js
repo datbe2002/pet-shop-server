@@ -1,8 +1,9 @@
 const bcrypt = require("bcryptjs");
 const httpStatus = require("http-status");
+const { ApiError } = require("../middleware/apiError");
+
 const usersRepository = require("../repository/usersRepository");
 
-const { ApiError } = require("../middleware/apiError");
 
 const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
@@ -32,6 +33,24 @@ const createNewUser = async (req, res) => {
   return newUserRespont;
 };
 
+const loginWithEmail = async (email, password) => {
+  try {
+  //check if email already exists
+  const user = await usersRepository.getUserByEmail(email);    
+  if(!user) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Email or password is wrong");
+  }
+  if(!(await bcrypt.compare(password, user.password))){
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Email or password is wrong pass")
+  }
+
+  return user;
+  } catch (error) {
+    throw error;
+  }  
+}
+
 module.exports = {
   createNewUser,
+  loginWithEmail,
 };

@@ -4,6 +4,7 @@ const sequelize = new Sequelize("petshop", "root", "12345", {
   host: "localhost",
   dialect: "mysql",
   logging: false,
+  
 });
 
 let connectDB = async () => {
