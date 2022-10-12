@@ -19,10 +19,23 @@ const authController = {
     try {
       const { email, password } = req.body;
       const user = await authServices.loginWithEmail(email, password);
-      res.status(200).send({ user });
+      const accessToken = await authServices.genAuthToken(user);
+      res.cookie("xxx-access-token", accessToken, {
+        httpOnly: true,
+        secure: false,
+        path: "/",
+        sameSite: "strict",
+      });
+      res.status(200).send({ user, accessToken });
     } catch (error) {
       res.status(500).send({ error: error });
     }
+  },
+  ///
+
+  logoutUser: async (req, res) => {
+    res.clearCookie("xxx-access-token");
+    res.status(200).json({ msg: "Logged out" });
   },
 };
 
