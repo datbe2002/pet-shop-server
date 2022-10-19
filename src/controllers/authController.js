@@ -5,12 +5,12 @@ const authController = {
   registerUser: async (req, res) => {
     try {
       const newUserResponse = await authServices.createNewUser(req, res);
-      return res.status(200).send({
+      return res.send({
         // msg: "Register successfully",
         newUserResponse,
       });
     } catch (error) {
-      return res.status(500).send({ error: error });
+      return res.send({ error: error });
     }
   },
 
@@ -28,14 +28,14 @@ const authController = {
       });
       return res.status(200).send({ user, accessToken });
     } catch (error) {
-      return res.status(500).send({ error: error });
+      return res.send({ error: error });
     }
   },
   ///
 
   logoutUser: async (req, res) => {
     res.clearCookie("xxx-access-token");
-    return res.status(200).json({ msg: "Logged out" });
+    return res.json({ msg: "Logged out" });
   },
 };
 

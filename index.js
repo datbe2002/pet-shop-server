@@ -14,13 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-
 //routes
 app.use("/api", authRoute);
 app.use("/api", userRoute);
-
-
-
 
 app.get("*", (req, res) =>
   res.status(200).send({

@@ -8,7 +8,7 @@ const userController = {
       const allUsers = await userServices.getAllUsers();
       return res.status(200).json({ users: allUsers });
     } catch (error) {
-      return res.status(500).json({ error: error });
+      return res.json({ error: error });
     }
   },
 
@@ -18,7 +18,7 @@ const userController = {
       await userServices.deleteUserById(id);
       return res.status(200).json({ msg: "User deleted successfully" });
     } catch (error) {
-      return res.status(500).json({ error: error });
+      return res.json({ error: error });
     }
   },
 };
