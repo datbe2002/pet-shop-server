@@ -6,9 +6,9 @@ const userController = {
   getAllUsers: async (req, res) => {
     try {
       const allUsers = await userServices.getAllUsers();
-      res.status(200).json({ users: allUsers });
+      return res.status(200).json({ users: allUsers });
     } catch (error) {
-      res.status(500).json({ error: error });
+      return res.status(500).json({ error: error });
     }
   },
 
@@ -16,9 +16,9 @@ const userController = {
     try {
       const { id } = req.params;
       await userServices.deleteUserById(id);
-      res.status(200).json({ msg: "User deleted successfully" });
+      return res.status(200).json({ msg: "User deleted successfully" });
     } catch (error) {
-      res.status(500).json({ error: error });
+      return res.status(500).json({ error: error });
     }
   },
 };

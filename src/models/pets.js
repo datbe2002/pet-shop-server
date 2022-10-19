@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { petStatus, petStatusDefault } = require("../constants/petStatus.enum");
 module.exports = (sequelize, DataTypes) => {
   class Pets extends Model {
     /**

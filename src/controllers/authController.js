@@ -5,12 +5,12 @@ const authController = {
   registerUser: async (req, res) => {
     try {
       const newUserResponse = await authServices.createNewUser(req, res);
-      res.status(200).send({
+      return res.status(200).send({
         // msg: "Register successfully",
         newUserResponse,
       });
     } catch (error) {
-      res.status(500).send({ error: error });
+      return res.status(500).send({ error: error });
     }
   },
 
@@ -26,16 +26,16 @@ const authController = {
         path: "/",
         sameSite: "strict",
       });
-      res.status(200).send({ user, accessToken });
+      return res.status(200).send({ user, accessToken });
     } catch (error) {
-      res.status(500).send({ error: error });
+      return res.status(500).send({ error: error });
     }
   },
   ///
 
   logoutUser: async (req, res) => {
     res.clearCookie("xxx-access-token");
-    res.status(200).json({ msg: "Logged out" });
+    return res.status(200).json({ msg: "Logged out" });
   },
 };
 

@@ -1,5 +1,7 @@
 require("dotenv").config();
+const httpStatus = require("http-status");
 const jwt = require("jsonwebtoken");
+const { ApiError } = require("./apiError");
 
 const role = (roles) => async (req, res, next) => {
   try {
@@ -10,7 +12,7 @@ const role = (roles) => async (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET,
       (err, payload) => {
         if (!roles.includes(payload?.role) || err) {
-          res.status(403).send({ error: "Error" });
+          throw new ApiError(httpStatus.UNAUTHORIZED, "Error credentials");
         }
         return payload;
       }
@@ -18,7 +20,7 @@ const role = (roles) => async (req, res, next) => {
     req.currentUser = currentUser;
     next();
   } catch (error) {
-    res.status(401).send({ error: "Invalid credentials" });
+    next(error);
   }
 };
 module.exports = role;

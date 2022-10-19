@@ -1,5 +1,9 @@
 "use strict";
 const { Model } = require("sequelize");
+const {
+  orderStatus,
+  orderStatusDefault,
+} = require("../constants/orderStatus.enum");
 module.exports = (sequelize, DataTypes) => {
   class Orders extends Model {
     /**
