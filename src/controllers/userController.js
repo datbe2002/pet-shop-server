@@ -1,3 +1,4 @@
+const { handleError } = require("../middleware/apiError");
 const db = require("../models");
 const userServices = require("../services/user.service");
 
@@ -8,7 +9,7 @@ const userController = {
       const allUsers = await userServices.getAllUsers();
       return res.status(200).json({ users: allUsers });
     } catch (error) {
-      return res.json({ error: error });
+      handleError(error, res);
     }
   },
 
@@ -18,7 +19,7 @@ const userController = {
       await userServices.deleteUserById(id);
       return res.status(200).json({ msg: "User deleted successfully" });
     } catch (error) {
-      return res.json({ error: error });
+      handleError(error, res);
     }
   },
 };

@@ -1,8 +1,9 @@
+const { handleError } = require("../middleware/apiError");
 const authServices = require("../services/auth.service");
 
 const authController = {
   //REGISTER
-  registerUser: async (req, res) => {
+  registerUser: async (req, res, next) => {
     try {
       const newUserResponse = await authServices.createNewUser(req, res);
       return res.send({
@@ -10,12 +11,12 @@ const authController = {
         newUserResponse,
       });
     } catch (error) {
-      return res.send({ error: error });
+      handleError(error, res);
     }
   },
 
   //LOGIN
-  loginUser: async (req, res) => {
+  loginUser: async (req, res, next) => {
     try {
       const { email, password } = req.body;
       const user = await authServices.loginWithEmail(email, password);
@@ -26,9 +27,9 @@ const authController = {
         path: "/",
         sameSite: "strict",
       });
-      return res.status(200).send({ user, accessToken });
+      return res.send({ user, accessToken });
     } catch (error) {
-      return res.send({ error: error });
+      handleError(error, res);
     }
   },
   ///
