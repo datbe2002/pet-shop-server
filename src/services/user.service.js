@@ -6,7 +6,7 @@ const usersRepository = require("../repository/usersRepository");
 const getAllUsers = async () => {
   const allUsers = await usersRepository.showAllUsers();
   if (allUsers.length == 0) {
-    throw new ApiError("No users found");
+    throw new ApiError(httpStatus[404], "No users found");
   }
   return allUsers;
 };
