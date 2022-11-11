@@ -28,7 +28,9 @@ const getUserByEmail = async (email) => {
 
 const showAllUsers = async () => {
   let userList = [];
-  userList = await Users.findAll({ raw: true });
+  userList = await Users.findAll({
+    raw: true,
+  });
   return userList;
 };
 
