@@ -37,7 +37,9 @@ const createNewUser = async (req, res) => {
 const loginWithEmail = async (email, password) => {
   try {
     //check if email already exists
+    // console.log(email);
     const user = await usersRepository.getUserByEmail(email);
+    // console.log(user);
     if (!user) {
       throw new ApiError(httpStatus.UNAUTHORIZED, "Email or password is wrong");
     }

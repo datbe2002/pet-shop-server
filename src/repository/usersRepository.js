@@ -1,9 +1,9 @@
-const db = require("../models");
+const db = require("../models/index");
 
 const Users = db.Users;
 
 const findOne = async (where) => {
-  return (await Users.findOne({ where: where }))?.dataValues;
+  return await Users.findOne({ where: where });
 };
 const createNewUser = async (user) => {
   return (
@@ -16,6 +16,7 @@ const createNewUser = async (user) => {
 };
 
 const getUserByEmail = async (email) => {
+  console.log(email);
   return (
     await Users.findOne({
       where: {

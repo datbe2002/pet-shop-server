@@ -1,15 +1,18 @@
 {
   "development": {
-    "use_env_variable": "DATABASE_URL",
-    "dialect": "mysql",
+    "username": "aijlsbrmwheyds",
+    "password": "502c42d0d69626a4c80c55e8c0205e860e90b33da986b41d79383b18ac88582c",
+    "database": "d6f0tqo9ag5pc2",
+    "host": "ec2-44-199-22-207.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "logging": false,
     "dialectOptions": {
       "ssl": {
         "require": true,
         "rejectUnauthorized": false
       }
     },
-    "ssl": true,
-    "logging": false
+    "timezone": "+07:00"
   },
   "test": {
     "username": "root",

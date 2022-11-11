@@ -8,6 +8,7 @@ connectDB();
 
 const authRoute = require("./src/routes/auth");
 const userRoute = require("./src/routes/user");
+const { convertToApiError, handleError } = require("./src/middleware/apiError");
 
 //middleware
 app.use(express.json());
@@ -17,7 +18,10 @@ app.use(cors());
 //routes
 app.use("/api", authRoute);
 app.use("/api", userRoute);
-
+app.use(convertToApiError);
+app.use((err, req, res, next) => {
+  handleError(err, res);
+});
 app.get("*", (req, res) =>
   res.status(200).send({
     message: "Welcome to the beginning of PetShop :D",
