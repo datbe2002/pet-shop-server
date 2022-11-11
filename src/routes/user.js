@@ -4,7 +4,7 @@ const role = require("../middleware/role.middleware");
 
 const router = require("express").Router();
 
-router.get("/user", userController.getAllUsers);
+router.get("/user", auth, userController.getAllUsers);
 router.patch("/user/update", userController.updateUser);
 
 router.delete("/user/:id", role("Admin"), userController.deleteUserById);
