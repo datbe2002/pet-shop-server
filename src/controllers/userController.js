@@ -2,7 +2,7 @@ const userServices = require("../services/user.service");
 
 const userController = {
   //GET ALL USERS
-  getAllUsers: async (req, res) => {
+  getAllUsers: async (req, res, next) => {
     try {
       const allUsers = await userServices.getAllUsers();
       console.log(allUsers);
@@ -12,7 +12,7 @@ const userController = {
     }
   },
 
-  deleteUserById: async (req, res) => {
+  deleteUserById: async (req, res, next) => {
     try {
       const { id } = req.params;
       await userServices.deleteUserById(id);
