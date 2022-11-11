@@ -29,6 +29,6 @@ app.get("*", (req, res) =>
 );
 //port
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Listen server from ${port}`));
+app.listen(PORT, () => console.log(`Listen server from ${PORT}`));
 
 module.exports = app;
