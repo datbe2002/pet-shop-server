@@ -11,6 +11,23 @@ const getAllUsers = async () => {
   return allUsers;
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const data = req.body;
+    if (!data.id) {
+      throw new ApiError(httpStatus.BAD_REQUEST, "Missing id");
+    }
+    const user = await usersRepository.getUserByID(data.id);
+
+    if (user) {
+      await usersRepository.update(data, { id: data.id });
+      return res.json("Updated user successfully");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const deleteUserById = async (id) => {
   const getUserById = await usersRepository.getUserByID(id);
   if (!getUserById) {
@@ -24,4 +41,5 @@ const deleteUserById = async (id) => {
 module.exports = {
   getAllUsers,
   deleteUserById,
+  updateUser,
 };

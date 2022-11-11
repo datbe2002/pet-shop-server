@@ -12,6 +12,15 @@ const userController = {
     }
   },
 
+  updateUser: async (req, res, next) => {
+    try {
+      const user = await userServices.updateUser(req, res);
+      return res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   deleteUserById: async (req, res, next) => {
     try {
       const { id } = req.params;

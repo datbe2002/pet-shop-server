@@ -42,6 +42,12 @@ const getUserByID = async (id) => {
   )?.dataValues;
 };
 
+const update = async (newObj, where) => {
+  await Users.update(newObj, {
+    where: where,
+  });
+};
+
 const deleteUserById = async (id) => {
   return (await Users.destroy({ where: { id: id } }))?.dataValues;
 };
@@ -53,4 +59,5 @@ module.exports = {
   showAllUsers,
   getUserByID,
   deleteUserById,
+  update,
 };
