@@ -11,7 +11,7 @@ const showAllCate = async () => {
 };
 
 const createCate = async (data) => {
-  //   console.log(data);
+  console.log(data);
   return await Categories.create({
     name: data.name,
   });

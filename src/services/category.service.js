@@ -14,11 +14,10 @@ const getAllCategories = async () => {
 const createNewCategory = async (req, res) => {
   const data = req.body;
   const existedName = await categoryRepository.getCategoryByName(data.name);
-  // console.log(existedName.name);
-  if (data.name === existedName.name) {
+
+  if (existedName) {
     throw new ApiError(httpStatus.FORBIDDEN, "This category already exists");
   }
-  // console.log(data);
   const creatNewCate = await categoryRepository.createCate(data);
   return creatNewCate;
 };
