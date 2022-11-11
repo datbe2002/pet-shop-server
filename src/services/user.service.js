@@ -30,11 +30,15 @@ const updateUser = async (req, res) => {
 
 const deleteUserById = async (id) => {
   const getUserById = await usersRepository.getUserByID(id);
+
   if (!getUserById) {
-    throw new ApiError(httpStatus[404], "User not found");
+    throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
+  }
+  if (getUserById.role === "Admin") {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Can not delete");
   }
 
-  //   console.log(getUserById.id);
+  // console.log(getUserById.id);
   await usersRepository.deleteUserById(id);
 };
 
