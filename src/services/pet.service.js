@@ -11,6 +11,17 @@ const getAllPets = async () => {
   return allPets;
 };
 
+const getPetId = async (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "No id found");
+  }
+
+  const getPet = await petRepository.getPetById(id);
+  return getPet;
+};
+
 module.exports = {
   getAllPets,
+  getPetId,
 };

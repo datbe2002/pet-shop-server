@@ -11,6 +11,15 @@ const petController = {
     }
   },
 
+  getPetById: async (req, res, next) => {
+    try {
+      const pet = await petServices.getPetId(req, res);
+      console.log(pet);
+      return res.json(pet);
+    } catch (error) {
+      next(error);
+    }
+  },
   //   createNewCategory: async (req, res, next) => {
   //     try {
   //       const newCate = await categoryServices.createNewCategory(req, res);
