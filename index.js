@@ -9,6 +9,7 @@ connectDB();
 const authRoute = require("./src/routes/auth");
 const userRoute = require("./src/routes/user");
 const categoryRoute = require("./src/routes/category");
+const petRoute = require("./src/routes/pet");
 const { convertToApiError, handleError } = require("./src/middleware/apiError");
 
 //middleware
@@ -20,6 +21,7 @@ app.use(cors());
 app.use("/api", authRoute);
 app.use("/api", userRoute);
 app.use("/api", categoryRoute);
+app.use("/api", petRoute);
 
 app.use(convertToApiError);
 app.use((err, req, res, next) => {
