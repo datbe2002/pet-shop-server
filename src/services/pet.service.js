@@ -21,7 +21,22 @@ const getPetId = async (req, res) => {
   return getPet;
 };
 
+const deletePetById = async (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "No id found");
+  }
+  const existedPet = await petRepository.getPetById(id);
+
+  if (!existedPet) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Can not find that category");
+  } else {
+    await petRepository.deletePet(id);
+  }
+};
+
 module.exports = {
   getAllPets,
   getPetId,
+  deletePetById,
 };

@@ -22,7 +22,12 @@ const getPetById = async (id) => {
   return petByID;
 };
 
+const deletePet = async (id) => {
+  return (await Pets.destroy({ where: { id: id } }))?.dataValues;
+};
+
 module.exports = {
   showAllPetsWithCate,
   getPetById,
+  deletePet,
 };

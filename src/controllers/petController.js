@@ -38,14 +38,14 @@ const petController = {
   //     }
   //   },
 
-  //   deleteCategoryById: async (req, res, next) => {
-  //     try {
-  //       const deleteCategory = await categoryServices.deleteCateById(req, res);
-  //       return res.json({ message: "Deleted category successfully" });
-  //     } catch (error) {
-  //       next(error);
-  //     }
-  //   },
+  deletePetById: async (req, res, next) => {
+    try {
+      const delePet = await petServices.deletePetById(req, res);
+      return res.json({ message: "Deleted pet successfully" });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = petController;
