@@ -8,7 +8,7 @@ router.patch("/category/update", categoryController.updateCategory);
 router.post("/category", categoryController.createNewCategory);
 router.delete(
   "/category/:id",
-
+  role("Admin"),
   categoryController.deleteCategoryById
 );
 
