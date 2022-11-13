@@ -37,7 +37,17 @@ const deletePetById = async (req, res) => {
   }
 };
 
+const createNewPet = async (req, res) => {
+  console.log(req.body);
+  const data = req.body;
+
+  // res.send("HOll");
+  const creatPets = await petRepository.createPet(data);
+  return creatPets;
+};
+
 module.exports = {
   getAllPets,
   deletePetById,
+  createNewPet,
 };

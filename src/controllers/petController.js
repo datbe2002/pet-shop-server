@@ -26,6 +26,15 @@ const petController = {
       next(error);
     }
   },
+
+  createNewpet: async (req, res, next) => {
+    try {
+      const newPet = await petServices.createNewPet(req, res);
+      return res.json({ message: "Create pet successfully" });
+    } catch (error) {
+      next(error);
+    }
+  },
   //   createNewCategory: async (req, res, next) => {
   //     try {
   //       const newCate = await categoryServices.createNewCategory(req, res);
