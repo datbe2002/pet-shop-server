@@ -1,16 +1,30 @@
 const petServices = require("../services/pet.service");
-
+const petRepository = require("../repository/petRepository");
 const petController = {
   getAllPets: async (req, res, next) => {
-    try {
-      let params = [];
-      // params.keyword = req.query.keyword
+    const { page } = req.query; // so page do nguoi dung nhap
+    const { limit } = req.query; // limit data moi trang
 
-      const allPet = await petServices.getAllPets(params, { pet: "all" });
-      // console.log(allPet);
-      return res.json(allPet);
-    } catch (error) {
-      next(error);
+    // console.log(page);
+    // console.log(limit);
+
+    if (page) {
+      //get page
+      let skip = (page - 1) * limit;
+      const getPetByPage = await petRepository.getPetWithPage(limit, skip);
+      return res.json(getPetByPage);
+    } else {
+      //get all
+      try {
+        let params = [];
+        // params.keyword = req.query.keyword
+
+        const allPet = await petServices.getAllPets(params, { pet: "all" });
+        // console.log(allPet);
+        return res.json(allPet);
+      } catch (error) {
+        next(error);
+      }
     }
   },
 
@@ -35,23 +49,6 @@ const petController = {
       next(error);
     }
   },
-  //   createNewCategory: async (req, res, next) => {
-  //     try {
-  //       const newCate = await categoryServices.createNewCategory(req, res);
-  //       return res.json({ message: "Create category successfully" });
-  //     } catch (error) {
-  //       next(error);
-  //     }
-  //   },
-
-  //   updateCategory: async (req, res, next) => {
-  //     try {
-  //       const updateCategory = await categoryServices.updateCategory(req, res);
-  //       return res.json({ message: "Update category successfully" });
-  //     } catch (error) {
-  //       next(error);
-  //     }
-  //   },
 
   updatePet: async (req, res, next) => {
     try {
@@ -66,6 +63,14 @@ const petController = {
     try {
       const delePet = await petServices.deletePetById(req, res);
       return res.json({ message: "Deleted pet successfully" });
+    } catch (error) {
+      next(error);
+    }
+  },
+  searchByName: async (req, res, next) => {
+    try {
+      const searhName = await petServices.searchByName(req, res);
+      return res.json(searhName);
     } catch (error) {
       next(error);
     }

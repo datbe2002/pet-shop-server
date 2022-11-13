@@ -3,7 +3,7 @@ const { QueryTypes } = require("sequelize");
 const { sequelize } = require("../models/index");
 const Pets = db.Pets;
 const query = `select p.id, p.name, p.price , p.img_url , p.description , p.status , p.cate_id , c.name as cate_name from "Pets" as p inner join "Categories" as c on c.id = p.cate_id `;
-
+const { Op } = require("sequelize");
 const showAllPetsWithCate = async () => {
   let petList = [];
 
@@ -12,6 +12,13 @@ const showAllPetsWithCate = async () => {
   });
   // console.log(petList);
   return petList;
+};
+
+const getPetWithPage = async (limit, skip) => {
+  let pet = [];
+  pet = await Pets.findAll({ offset: skip, limit: limit });
+  console.log(pet);
+  return pet;
 };
 
 const getPetById = async (id) => {
@@ -43,10 +50,22 @@ const updatePet = async (newObj, where) => {
   });
 };
 
+const searchByName = async (name) => {
+  let petListFound = [];
+
+  petListFound = await Pets.findAll({
+    where: { name: { [Op.iLike]: "%" + name + "%" } },
+  });
+
+  return petListFound;
+};
+
 module.exports = {
   showAllPetsWithCate,
   getPetById,
   deletePet,
   createPet,
   updatePet,
+  searchByName,
+  getPetWithPage,
 };

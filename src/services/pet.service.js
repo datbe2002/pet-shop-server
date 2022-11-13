@@ -62,9 +62,17 @@ const updatepet = async (req, res) => {
   }
 };
 
+const searchByName = async (req, res) => {
+  let { term } = req.query;
+  // console.log(term);
+  const searchResult = await petRepository.searchByName(term);
+  return searchResult;
+};
+
 module.exports = {
   getAllPets,
   deletePetById,
   createNewPet,
   updatepet,
+  searchByName,
 };
