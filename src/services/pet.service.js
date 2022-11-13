@@ -31,7 +31,7 @@ const deletePetById = async (req, res) => {
   const existedPet = await petRepository.getPetById(id);
 
   if (!existedPet) {
-    throw new ApiError(httpStatus.NOT_FOUND, "Can not find that category");
+    throw new ApiError(httpStatus.NOT_FOUND, "Can not find that pet");
   } else {
     await petRepository.deletePet(id);
   }
@@ -46,8 +46,25 @@ const createNewPet = async (req, res) => {
   return creatPets;
 };
 
+const updatepet = async (req, res) => {
+  const data = req.body;
+  console.log(data);
+  if (!data.id) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "No id found");
+  }
+  const existedPet = await petRepository.getPetById(data.id);
+  // console.log(existedPet);
+  if (existedPet.length == 0) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Can not find that pet");
+  } else {
+    const create = await petRepository.updatePet(data, { id: data.id });
+    return create;
+  }
+};
+
 module.exports = {
   getAllPets,
   deletePetById,
   createNewPet,
+  updatepet,
 };

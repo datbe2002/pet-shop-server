@@ -53,6 +53,15 @@ const petController = {
   //     }
   //   },
 
+  updatePet: async (req, res, next) => {
+    try {
+      const updatepet = await petServices.updatepet(req, res);
+      return res.json({ message: "Update pet successfully" });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   deletePetById: async (req, res, next) => {
     try {
       const delePet = await petServices.deletePetById(req, res);

@@ -15,12 +15,10 @@ const showAllPetsWithCate = async () => {
 };
 
 const getPetById = async (id) => {
-  console.log(id);
   const petByID = await sequelize.query(query + `where p.id = ? `, {
     type: QueryTypes.SELECT,
     replacements: [id],
   });
-  console.log(petByID);
   return petByID;
 };
 
@@ -39,9 +37,16 @@ const createPet = async (data) => {
   });
 };
 
+const updatePet = async (newObj, where) => {
+  await Pets.update(newObj, {
+    where: where,
+  });
+};
+
 module.exports = {
   showAllPetsWithCate,
   getPetById,
   deletePet,
   createPet,
+  updatePet,
 };
