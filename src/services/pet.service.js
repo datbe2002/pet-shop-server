@@ -3,22 +3,24 @@ const { ApiError } = require("../middleware/apiError");
 
 const petRepository = require("../repository/petRepository");
 
-const getAllPets = async () => {
-  const allPets = await petRepository.showAllPetsWithCate();
-  if (allPets.length == 0) {
-    throw new ApiError(httpStatus.NOT_FOUND, "No pet found");
-  }
-  return allPets;
-};
+const getAllPets = async (params, option) => {
+  // console.log(option);
 
-const getPetId = async (req, res) => {
-  const id = req.params.id;
-  if (!id) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "No id found");
+  try {
+    if (option.pet === "all") {
+      const allPets = await petRepository.showAllPetsWithCate();
+      if (allPets.length == 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "No pet found");
+      }
+      return allPets;
+    }
+    if (option.pet === "one") {
+      const getPet = await petRepository.getPetById(params.id);
+      return getPet;
+    }
+  } catch (error) {
+    throw error;
   }
-
-  const getPet = await petRepository.getPetById(id);
-  return getPet;
 };
 
 const deletePetById = async (req, res) => {
@@ -37,6 +39,5 @@ const deletePetById = async (req, res) => {
 
 module.exports = {
   getAllPets,
-  getPetId,
   deletePetById,
 };

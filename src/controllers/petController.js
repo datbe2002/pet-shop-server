@@ -3,8 +3,11 @@ const petServices = require("../services/pet.service");
 const petController = {
   getAllPets: async (req, res, next) => {
     try {
-      const allPet = await petServices.getAllPets();
-      console.log(allPet);
+      let params = [];
+      // params.keyword = req.query.keyword
+
+      const allPet = await petServices.getAllPets(params, { pet: "all" });
+      // console.log(allPet);
       return res.json(allPet);
     } catch (error) {
       next(error);
@@ -13,8 +16,11 @@ const petController = {
 
   getPetById: async (req, res, next) => {
     try {
-      const pet = await petServices.getPetId(req, res);
-      console.log(pet);
+      const pet = await petServices.getAllPets(
+        { id: req.params.id },
+        { pet: "one" }
+      );
+      // console.log(pet);
       return res.json(pet);
     } catch (error) {
       next(error);
