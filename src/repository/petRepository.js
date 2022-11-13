@@ -3,12 +3,11 @@ const { QueryTypes } = require("sequelize");
 const { sequelize } = require("../models/index");
 const Pets = db.Pets;
 const query = `select p.id, p.name, p.price , p.img_url , p.description , p.status , c.name as cate_name from "Pets" as p inner join "Categories" as c on c.id = p.cate_id `;
-const query2 = `select p.id, p.name, p.price , p.img_url , p.description , p.status , c.name as cate_name from "Pets" as p inner join "Categories" as c on c.id = p.cate_id `;
 
-const showAllPetsWithCate = async (objSearch) => {
+const showAllPetsWithCate = async () => {
   let petList = [];
 
-  petList = await sequelize.query(query2 + `where p.name like '% ara'`, {
+  petList = await sequelize.query(query, {
     type: QueryTypes.SELECT,
   });
   // console.log(petList);
