@@ -3,7 +3,7 @@ const categoryController = require("../controllers/categoryController");
 const role = require("../middleware/role.middleware");
 const router = require("express").Router();
 
-router.get("/category", role("Admin"), categoryController.getAllCategories);
+router.get("/category", categoryController.getAllCategories);
 router.patch("/category/update", categoryController.updateCategory);
 router.post("/category", role("Admin"), categoryController.createNewCategory);
 router.delete(
