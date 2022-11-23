@@ -35,7 +35,7 @@ const deleteUserById = async (id) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
   }
   if (getUserById.role === "Admin") {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Can not delete");
+    throw new ApiError(httpStatus.BAD_REQUEST, "Can not delete ADMINISTRATOR");
   }
 
   // console.log(getUserById.id);

@@ -66,6 +66,7 @@ const searchByName = async (req, res) => {
   let { term } = req.query;
   // console.log(term);
   const searchResult = await petRepository.searchByName(term);
+  console.log(searchResult);
   return searchResult;
 };
 
