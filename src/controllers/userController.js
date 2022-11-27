@@ -5,7 +5,7 @@ const userController = {
   getAllUsers: async (req, res, next) => {
     try {
       const allUsers = await userServices.getAllUsers();
-      console.log(allUsers);
+      // console.log(allUsers);
       return res.status(200).json({ users: allUsers });
     } catch (error) {
       next(error);

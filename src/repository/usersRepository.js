@@ -16,7 +16,6 @@ const createNewUser = async (user) => {
 };
 
 const getUserByEmail = async (email) => {
-  console.log(email);
   return (
     await Users.findOne({
       where: {

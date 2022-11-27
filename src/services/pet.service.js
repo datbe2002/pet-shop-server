@@ -38,7 +38,7 @@ const deletePetById = async (req, res) => {
 };
 
 const createNewPet = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const data = req.body;
 
   // res.send("HOll");
@@ -48,7 +48,7 @@ const createNewPet = async (req, res) => {
 
 const updatepet = async (req, res) => {
   const data = req.body;
-  console.log(data);
+  // console.log(data);
   if (!data.id) {
     throw new ApiError(httpStatus.BAD_REQUEST, "No id found");
   }

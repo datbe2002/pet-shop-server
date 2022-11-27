@@ -21,7 +21,7 @@ const updateUser = async (req, res) => {
 
     if (user) {
       await usersRepository.update(data, { id: data.id });
-      return res.json("Updated user successfully");
+      return res.json("Updated successfully");
     }
   } catch (error) {
     throw error;

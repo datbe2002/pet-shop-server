@@ -4,7 +4,7 @@ const categoryController = {
   getAllCategories: async (req, res, next) => {
     try {
       const allCate = await categoryServices.getAllCategories();
-      console.log(allCate);
+      // console.log(allCate);
       return res.json(allCate);
     } catch (error) {
       next(error);

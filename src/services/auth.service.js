@@ -25,7 +25,7 @@ const createNewUser = async (req, res) => {
     password: hashPass,
     avatar: null,
   });
-  console.log(newUser);
+  // console.log(newUser);
 
   if (!newUser) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Register fail");
