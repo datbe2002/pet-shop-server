@@ -24,6 +24,14 @@ module.exports = {
           key: "id",
         },
       },
+      user_id: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+      },
       quantity: {
         defaultValue: 0,
         type: Sequelize.INTEGER,

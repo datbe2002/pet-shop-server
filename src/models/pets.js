@@ -40,6 +40,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.TEXT,
       },
+      quantity_stock: {
+        defaultValue: 0,
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 0,
+        },
+      },
+
       status: {
         allowNull: false,
         type: DataTypes.ENUM(petStatus),
